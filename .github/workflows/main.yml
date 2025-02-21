@@ -50,9 +50,12 @@ jobs:
 
     - name: Commit and push chess position image
       run: |
+        # Добавляем уникальный параметр к URL изображения
+        TIMESTAMP=$(date +%s)
+        sed -i "s|![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.png.*)|![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.png?$TIMESTAMP)|" README.md
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add chess_position.png
+        git add *
         git commit -m "Add generated chess position image"
         git push
       env:
