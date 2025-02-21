@@ -45,14 +45,13 @@ jobs:
 
         # Генерация SVG и сохранение в PNG
         svg = chess.svg.board(board)
+        with open('chess_position.svg', 'w') as f:
+            f.write(svg)
         svg2png(bytestring=svg, write_to='chess_position.png')
         "
 
     - name: Commit and push chess position image
       run: |
-        # Добавляем уникальный параметр к URL изображения
-        TIMESTAMP=$(date +%s)
-        sed -i "s|![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.png.*)|![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.png?$TIMESTAMP)|" README.md
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
         git add *
