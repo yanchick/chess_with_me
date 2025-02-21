@@ -4,5 +4,5 @@
 
 <!--  ![example workflow](https://github.com/razonrus/chess_with_me/actions/workflows/main.yml/badge.svg)-->
 ![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.svg)
-<img src="[https://github.com/favicon.ico](https://github.com/razonrus/chess_with_me/raw/main/chess_position.svg)" width="300">
+<img src="https://github.com/razonrus/chess_with_me/raw/main/chess_position.svg" width="300"/>
 ![Chess Position](https://github.com/razonrus/chess_with_me/raw/main/chess_position.png?)
