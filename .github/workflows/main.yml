@@ -1,0 +1,52 @@
+name: Chess Position Visualization
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  visualize-chess-position:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install python-chess
+
+    - name: Generate chess position image
+      run: |
+        python -c "
+        import chess
+        import chess.pgn
+        import chess.svg
+        from cairosvg import svg2png
+
+        # Чтение PGN-файла
+        pgn = open('game.pgn')
+        game = chess.pgn.read_game(pgn)
+
+        # Получение последней позиции
+        board = game.board()
+        for move in game.mainline_moves():
+            board.push(move)
+
+        # Генерация SVG и сохранение в PNG
+        svg = chess.svg.board(board)
+        svg2png(bytestring=svg, write_to='chess_position.png')
+        "
+
+    - name: Upload chess position image as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: chess-position
+        path: chess_position.png
